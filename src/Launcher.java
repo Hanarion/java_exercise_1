@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Launcher {
-    static List<Command> commandList = new ArrayList<>(Arrays.asList(new Fibo(), new Quit()));
+    static List<Command> commandList = new ArrayList<>(Arrays.asList(new Fibo(), new Freq(), new Quit()));
 
     public static List<String> freq(Scanner scanner) {
         List<String> res = new ArrayList<>();
