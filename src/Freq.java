@@ -27,7 +27,7 @@ public class Freq implements Command {
             return false;
         }
 
-        String[] words = fichier.replaceAll("[^a-zA-Z ]", "").toLowerCase().split(" ");
+        String[] words = fichier.replaceAll("[^a-zA-Z \n]", "").toLowerCase().split("\\s+");
 
         Arrays.stream(words).filter((elem) -> !elem.isBlank())
                 .collect(Collectors.groupingBy((elem) -> elem)).entrySet().stream()
