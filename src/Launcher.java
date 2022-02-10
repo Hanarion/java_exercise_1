@@ -2,47 +2,40 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Launcher {
-    static List<String> arrayList = new ArrayList<>(Arrays.asList("fibo", "quit"));
+    static List<Command> commandList = new ArrayList<>(Arrays.asList(new Fibo(), new Quit()));
 
-    public static String askCommand(Scanner scanner) {
+    public static List<String> freq(Scanner scanner) {
+        List<String> res = new ArrayList<>();
+
+        return res;
+    }
+
+
+    public static boolean askCommand(Scanner scanner) {
         System.out.print("> ");
         String entree = scanner.next();
-        if (entree.equals("fibo")) {
-            System.out.println("Raboule le nombre pour fibo fréro : ");
-            System.out.print("> ");
-
-            int n = scanner.nextInt();
-            scanner.nextLine();
-
-            int a = 0, b = 1, c = 0;
-            for (int i = 2; i < n; ++i) {
-                c = a + b;
-                a = b;
-                b = c;
+        AtomicBoolean res = new AtomicBoolean(false);
+        AtomicBoolean found = new AtomicBoolean(false);
+        commandList.forEach(command -> {
+            if (command.name().equals(entree)) {
+                res.set(command.run(scanner));
+                found.set(true);
             }
-
-            System.out.println(c + a);
-
-
-            return entree;
-        } else if (!entree.equals("quit")) {
+        });
+        if (!found.get())
             System.out.println("Unknown command");
-            return entree;
-        }
-
-        return null;
+        return res.get();
     }
 
     public static void main(String[] args) {
         System.out.println("Welcome to the not so great Java program, today we are going to do ABSOLUTELY NOTHING !");
         System.out.println("Please enter a beautiful command, the list of command is :");
-        arrayList.forEach(elem -> {
-            System.out.println(" - " + elem);
-        });
+        commandList.forEach(elem -> System.out.println(" - " + elem.name()));
         Scanner toto = new Scanner(System.in);
-        while (askCommand(toto) != null) ;
+        while (!askCommand(toto)) ;
         toto.close();
     }
 }
