@@ -51,7 +51,7 @@ public class Predict implements Command {
         System.out.println("Raboule le mot fréro : ");
         System.out.print("?> ");
 
-        String mot = scanner.next();
+        String mot = scanner.next().toLowerCase();
         int limit = 20;
         System.out.print(mot + ' ');
         while (res.containsKey(mot) && limit > 0) {
@@ -78,7 +78,7 @@ public class Predict implements Command {
         System.out.println();
 
         if (limit == 20) {
-            System.out.println("The word doesn't exists, learn how to write");
+            System.out.println("The word '" + mot + "' doesn't exists, learn how to write");
         }
 
 
