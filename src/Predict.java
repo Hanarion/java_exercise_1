@@ -13,8 +13,8 @@ public class Predict implements Command {
 
     @Override
     public boolean run(Scanner scanner) {
-        System.out.println("Raboule le chemin de fichier fréro : ");
-        System.out.print("?> ");
+//        System.out.println("Raboule le chemin de fichier fréro : ");
+//        System.out.print("?> ");
 
         String path = scanner.next();
         Path path_Path = Paths.get(path);
@@ -26,7 +26,7 @@ public class Predict implements Command {
             return false;
         }
 
-        String[] words = fichier.replaceAll("[^a-zA-Z \n]", "").toLowerCase().split("\\s+");
+        String[] words = fichier.toLowerCase().split("\\s+");
 
         Map<String, Map<String, Integer>> res = new LinkedHashMap<>();
         for (int i = 0; i < (words.length - 1); i++) {
@@ -48,8 +48,8 @@ public class Predict implements Command {
 
         System.out.println(res);
 
-        System.out.println("Raboule le mot fréro : ");
-        System.out.print("?> ");
+//        System.out.println("Raboule le mot fréro : ");
+//        System.out.print("?> ");
 
         String mot = scanner.next().toLowerCase();
         int limit = 20;
